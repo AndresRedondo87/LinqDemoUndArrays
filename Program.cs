@@ -25,6 +25,57 @@ namespace LinqDemoUndArrays
             um.MaleStudents();
             um.FemaleStudents();
 
+
+            Console.WriteLine();
+            Console.WriteLine();
+            // BEISPIEL AUS INTERNET
+
+
+            // Sortieren https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/sorting-data
+            string[] words1 = { "the", "quick", "brown", "fox", "jumps" };
+
+            IEnumerable<string> query1 = from word in words1
+                                        orderby word.Length
+                                        select word;
+
+            foreach (string str in query1)
+                Console.WriteLine(str);
+
+            /* This code produces the following output:  
+
+                the  
+                fox  
+                quick  
+                brown  
+                jumps  
+            */
+            /// https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview
+            /// 
+            string sentence = "the quick brown fox jumps over the lazy dog";
+            Console.WriteLine(sentence);
+            // Split the string into individual words to create a collection.  
+            string[] words = sentence.Split(' ');
+
+            // Using query expression syntax.  
+            var query = from word in words
+                        group word by word.Length into gr
+                        orderby gr.Key
+                        select new { Length = gr.Key, Words = gr };
+
+            //// Using method-based query syntax.  
+            //var query2 = words.
+            //    GroupBy(w => w.Length, w => w.ToUpper()).
+            //    Select(g => new { Length = g.Key, Words = g }).
+            //    OrderBy(o => o.Length);
+
+            foreach (var obj in query)
+            {
+                Console.WriteLine("Words of length {0}:", obj.Length);
+                foreach (string word in obj.Words)
+                    Console.WriteLine(word);
+            }
+            //--------------------------------- BEISPIEL AUS INTERNET----- ENDE
+
             Console.ReadKey();
         }
 
