@@ -11,9 +11,9 @@ namespace LinqDemoUndArrays
     {
         static void Main(string[] args)
         {
-            int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            //int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-            OddNumbers(numbers);
+            //OddNumbers(numbers);
 
 
 
@@ -25,56 +25,114 @@ namespace LinqDemoUndArrays
             um.MaleStudents();
             um.FemaleStudents();
 
-
             Console.WriteLine();
-            Console.WriteLine();
-            // BEISPIEL AUS INTERNET
+            um.SortStudentsByAge();
 
-
-            // Sortieren https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/sorting-data
-            string[] words1 = { "the", "quick", "brown", "fox", "jumps" };
-
-            IEnumerable<string> query1 = from word in words1
-                                        orderby word.Length
-                                        select word;
-
-            foreach (string str in query1)
-                Console.WriteLine(str);
-
-            /* This code produces the following output:  
-
-                the  
-                fox  
-                quick  
-                brown  
-                jumps  
-            */
-            /// https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview
-            /// 
-            string sentence = "the quick brown fox jumps over the lazy dog";
-            Console.WriteLine(sentence);
-            // Split the string into individual words to create a collection.  
-            string[] words = sentence.Split(' ');
-
-            // Using query expression syntax.  
-            var query = from word in words
-                        group word by word.Length into gr
-                        orderby gr.Key
-                        select new { Length = gr.Key, Words = gr };
-
-            //// Using method-based query syntax.  
-            //var query2 = words.
-            //    GroupBy(w => w.Length, w => w.ToUpper()).
-            //    Select(g => new { Length = g.Key, Words = g }).
-            //    OrderBy(o => o.Length);
-
-            foreach (var obj in query)
+            um.AllStudentsByValladolid();
+            int  eingabe;
+            do
             {
-                Console.WriteLine("Words of length {0}:", obj.Length);
-                foreach (string word in obj.Words)
-                    Console.WriteLine(word);
+                Console.Write("Uni Id eingeben zum ausgeben seine Studenten[1-4, to End 0]:");
+                eingabe = Convert.ToInt32(Console.ReadLine());
+                if (eingabe != 0)
+                {
+                    um.AllStudentsByUni(eingabe);
+                }
+                else
+                {
+                    Console.WriteLine("END");
+                }
+            } while (eingabe != 0);
+
+            Console.WriteLine("LEHRER OPTION:");
+            Console.Write("Trage die gesuchte Id ein [1-4]");
+            string input = Console.ReadLine();
+            try
+            {
+                int inputAsInt = Convert.ToInt32(input);
+                um.AllStudentsByUni(inputAsInt);
             }
-            //--------------------------------- BEISPIEL AUS INTERNET----- ENDE
+            catch (Exception)
+            {
+                Console.WriteLine("Bitte geben sie nur gültige Ids ein. ");
+            }
+
+
+            //Console.WriteLine();
+            //Console.WriteLine();
+            //// BEISPIEL AUS INTERNET
+            //// Sortieren https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/sorting-data
+            //string[] words1 = { "the", "quick", "brown", "fox", "jumps" };
+
+            //IEnumerable<string> query1 = from word in words1
+            //                            orderby word.Length
+            //                            select word;
+            //foreach (string str in query1)
+            //    Console.WriteLine(str);
+            ///* This code produces the following output:  
+
+            //    the  
+            //    fox  
+            //    quick  
+            //    brown  
+            //    jumps  
+            //*/
+            ///// https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview
+            ///// 
+            //string sentence = "the quick brown fox jumps over the lazy dog";
+            //Console.WriteLine(sentence);
+            //// Split the string into individual words to create a collection.  
+            //string[] words = sentence.Split(' ');
+
+            //// Using query expression syntax.  
+            //var query = from word in words
+            //            group word by word.Length into gr
+            //            orderby gr.Key
+            //            select new { Length = gr.Key, Words = gr };
+
+            ////// Using method-based query syntax.  
+            ////var query2 = words.
+            ////    GroupBy(w => w.Length, w => w.ToUpper()).
+            ////    Select(g => new { Length = g.Key, Words = g }).
+            ////    OrderBy(o => o.Length);
+
+            //foreach (var obj in query)
+            //{
+            //    Console.WriteLine("Words of length {0}:", obj.Length);
+            //    foreach (string word in obj.Words)
+            //        Console.WriteLine(word);
+            //}
+            ////--------------------------------- BEISPIEL AUS INTERNET----- ENDE
+
+
+
+            // SORTIEREN via orderby
+            int[] someInts= new int[] {34,56,79,98,205,11,0,5,6,7,8 };
+            foreach (var num in someInts)
+            {
+                Console.WriteLine(num);
+            }
+            Console.WriteLine("Sortiert");
+            IEnumerable<int> sortedInts = from number in someInts orderby number select number;
+            //IEnumerable<int> sortedInts = from i in someInts orderby i select i; //Lehrer Lösung
+            //manchmal aussagekräftige Namen, manchmal SCHEISSDRAUF!
+            foreach (var num in sortedInts)
+            {
+                Console.WriteLine(num);
+            }
+
+            Console.WriteLine("Reversed...");
+            //die sortierten in umgekehrte Ordnung....
+            //IEnumerable<int> reversedInts = sortedInts.Reverse();
+            // IEnumerables haben nutzlichen Methoden auch!
+            //oder wenn schon vorhanden und wir müssen es andersum sortieren,dann :
+            IEnumerable<int> reversedInts = from number in someInts orderby number descending select number;
+
+            foreach (var num in reversedInts)
+            {
+                Console.WriteLine(num);
+            }
+
 
             Console.ReadKey();
         }
@@ -119,6 +177,8 @@ namespace LinqDemoUndArrays
             // Befüllen der UniversitätenList
             universities.Add(new University { Id = 1, Name = "Yale" });
             universities.Add(new University { Id = 2, Name = "Valladolid" });
+            universities.Add(new University { Id = 3, Name = "Madrid" });
+            universities.Add(new University { Id = 4, Name = "Salamanca" });
 
 
             // Befüllen der StudentsList
@@ -127,10 +187,10 @@ namespace LinqDemoUndArrays
             students.Add(new Student { Id = 3, Name = "Leyla", Gender = "female", Age = 19, UniversityId = 2 });
             students.Add(new Student { Id = 4, Name = "James", Gender = "male", Age = 25, UniversityId = 2 });
             students.Add(new Student { Id = 5, Name = "Linda", Gender = "female", Age = 20, UniversityId = 2 });
-            students.Add(new Student { Id = 6, Name = "James2", Gender = "male", Age = 26, UniversityId = 2 });
-            students.Add(new Student { Id = 7, Name = "James3", Gender = "male", Age = 23, UniversityId = 2 });
-            students.Add(new Student { Id = 8, Name = "James4", Gender = "male", Age = 22, UniversityId = 2 });
-            students.Add(new Student { Id = 9, Name = "James5", Gender = "male", Age = 27, UniversityId = 2 });
+            students.Add(new Student { Id = 6, Name = "James2", Gender = "male", Age = 26, UniversityId = 3 });
+            students.Add(new Student { Id = 7, Name = "James3", Gender = "male", Age = 23, UniversityId = 3 });
+            students.Add(new Student { Id = 8, Name = "James4", Gender = "male", Age = 22, UniversityId = 3 });
+            students.Add(new Student { Id = 9, Name = "James5", Gender = "male", Age = 27, UniversityId = 4 });
         }
 
         // Noch eine Methode um alle die Männlichen anzuzeigen:
@@ -161,6 +221,62 @@ namespace LinqDemoUndArrays
                 student.Print();
             }
         }
+
+        // Sortieren und Filtern NEUE METHODE
+        public void SortStudentsByAge()
+        {
+            var sortedStudentsByAge = from student in students orderby student.Age select student;
+            //IOrderedEnumerable<Student> sortedStudentsByAge = from student in students orderby student.Age select student;    //das gleiche
+            // var macht diese IOrderedEnumerable automatisch anerkannt von was dadrinnen geladen wird.
+            // VisualStudio weisst  dass wir da ein IOrderedEnumerable der Typen Student haben wollen.
+            // wir brauchen nicht es immer explizit so deklarieren. Es ist bequemer so.
+            // es ist nur etwas uneffizienter aber merk man nichts bis sehr komplexe Anwendungen!
+
+            Console.WriteLine("Sortierte Studenten nach Alter");
+            foreach (var student in sortedStudentsByAge)
+            {
+                student.Print();
+            }
+
+        }
+
+        public void AllStudentsByUni(int uniId)
+        {
+            var allStudentsByUni = from student in students
+                                   join University in universities 
+                                   on student.UniversityId equals University.Id     //equals heisst == ist hier besser sogar.
+                                   where University.Id == uniId
+                                   select student;
+            // var oder IEnumerable<Student> EGAL HIER
+
+            // STUDENTEN OPTION
+            // IEnumerable<Student> theStudents = from student in students where student.UniversityId == uniId select student;
+            // es geht genauso, es zeigt aber kein JOIN, die sollten hierfür Praktisch sein
+
+            Console.WriteLine($"Alle Studenten der Uni mit Id {uniId}");
+            foreach (var student in allStudentsByUni)
+            //foreach (var student in theStudents)
+            {
+                student.Print();
+            }
+        }
+
+        //LEHRER OPTION
+        public void AllStudentsByValladolid()
+        {
+            IEnumerable<Student> vallaStudents = from student in students
+                                                 join University in universities on student.UniversityId
+                                                 equals University.Id
+                                                 where University.Name == "Valladolid"
+                                                 select student;
+
+            Console.WriteLine($"LEHRER VERSION: Alle Studenten in der Uni Valladolid(fest):");
+            foreach (var student in vallaStudents)
+            {
+                student.Print();
+            }
+        }
+
     }
 }
 
