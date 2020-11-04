@@ -29,7 +29,7 @@ namespace LinqDemoUndArrays
             um.SortStudentsByAge();
 
             um.AllStudentsByValladolid();
-            int  eingabe;
+            int eingabe;
             do
             {
                 Console.Write("Uni Id eingeben zum ausgeben seine Studenten[1-4, to End 0]:");
@@ -58,80 +58,98 @@ namespace LinqDemoUndArrays
             }
 
 
-            //Console.WriteLine();
-            //Console.WriteLine();
-            //// BEISPIEL AUS INTERNET
-            //// Sortieren https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/sorting-data
-            //string[] words1 = { "the", "quick", "brown", "fox", "jumps" };
+            //////Console.WriteLine();
+            //////Console.WriteLine();
+            //////// BEISPIEL AUS INTERNET
+            //////// Sortieren https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/sorting-data
+            //////string[] words1 = { "the", "quick", "brown", "fox", "jumps" };
 
-            //IEnumerable<string> query1 = from word in words1
-            //                            orderby word.Length
-            //                            select word;
-            //foreach (string str in query1)
-            //    Console.WriteLine(str);
-            ///* This code produces the following output:  
+            //////IEnumerable<string> query1 = from word in words1
+            //////                            orderby word.Length
+            //////                            select word;
+            //////foreach (string str in query1)
+            //////    Console.WriteLine(str);
+            ///////* This code produces the following output:  
 
-            //    the  
-            //    fox  
-            //    quick  
-            //    brown  
-            //    jumps  
-            //*/
-            ///// https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview
-            ///// 
-            //string sentence = "the quick brown fox jumps over the lazy dog";
-            //Console.WriteLine(sentence);
-            //// Split the string into individual words to create a collection.  
-            //string[] words = sentence.Split(' ');
+            //////    the  
+            //////    fox  
+            //////    quick  
+            //////    brown  
+            //////    jumps  
+            //////*/
+            ///////// https://docs.microsoft.com/de-de/dotnet/csharp/programming-guide/concepts/linq/standard-query-operators-overview
+            ///////// 
+            //////string sentence = "the quick brown fox jumps over the lazy dog";
+            //////Console.WriteLine(sentence);
+            //////// Split the string into individual words to create a collection.  
+            //////string[] words = sentence.Split(' ');
 
-            //// Using query expression syntax.  
-            //var query = from word in words
-            //            group word by word.Length into gr
-            //            orderby gr.Key
-            //            select new { Length = gr.Key, Words = gr };
+            //////// Using query expression syntax.  
+            //////var query = from word in words
+            //////            group word by word.Length into gr
+            //////            orderby gr.Key
+            //////            select new { Length = gr.Key, Words = gr };
 
-            ////// Using method-based query syntax.  
-            ////var query2 = words.
-            ////    GroupBy(w => w.Length, w => w.ToUpper()).
-            ////    Select(g => new { Length = g.Key, Words = g }).
-            ////    OrderBy(o => o.Length);
+            ////////// Using method-based query syntax.  
+            ////////var query2 = words.
+            ////////    GroupBy(w => w.Length, w => w.ToUpper()).
+            ////////    Select(g => new { Length = g.Key, Words = g }).
+            ////////    OrderBy(o => o.Length);
 
-            //foreach (var obj in query)
-            //{
-            //    Console.WriteLine("Words of length {0}:", obj.Length);
-            //    foreach (string word in obj.Words)
-            //        Console.WriteLine(word);
-            //}
-            ////--------------------------------- BEISPIEL AUS INTERNET----- ENDE
+            //////foreach (var obj in query)
+            //////{
+            //////    Console.WriteLine("Words of length {0}:", obj.Length);
+            //////    foreach (string word in obj.Words)
+            //////        Console.WriteLine(word);
+            //////}
+            ////////--------------------------------- BEISPIEL AUS INTERNET----- ENDE
 
 
 
-            // SORTIEREN via orderby
-            int[] someInts= new int[] {34,56,79,98,205,11,0,5,6,7,8 };
-            foreach (var num in someInts)
-            {
-                Console.WriteLine(num);
-            }
-            Console.WriteLine("Sortiert");
-            IEnumerable<int> sortedInts = from number in someInts orderby number select number;
-            //IEnumerable<int> sortedInts = from i in someInts orderby i select i; //Lehrer Lösung
-            //manchmal aussagekräftige Namen, manchmal SCHEISSDRAUF!
-            foreach (var num in sortedInts)
-            {
-                Console.WriteLine(num);
-            }
+            ////// SORTIEREN via orderby
+            ////int[] someInts = new int[] { 34, 56, 79, 98, 205, 11, 0, 5, 6, 7, 8 };
+            ////foreach (var num in someInts)
+            ////{
+            ////    Console.WriteLine(num);
+            ////}
+            ////Console.WriteLine("Sortiert");
+            ////IEnumerable<int> sortedInts = from number in someInts orderby number select number;
+            //////IEnumerable<int> sortedInts = from i in someInts orderby i select i; //Lehrer Lösung
+            //////manchmal aussagekräftige Namen, manchmal SCHEISSDRAUF!
+            ////foreach (var num in sortedInts)
+            ////{
+            ////    Console.WriteLine(num);
+            ////}
 
-            Console.WriteLine("Reversed...");
-            //die sortierten in umgekehrte Ordnung....
-            //IEnumerable<int> reversedInts = sortedInts.Reverse();
-            // IEnumerables haben nutzlichen Methoden auch!
-            //oder wenn schon vorhanden und wir müssen es andersum sortieren,dann :
-            IEnumerable<int> reversedInts = from number in someInts orderby number descending select number;
+            ////Console.WriteLine("Reversed...");
+            //////die sortierten in umgekehrte Ordnung....
+            //////IEnumerable<int> reversedInts = sortedInts.Reverse();
+            ////// IEnumerables haben nutzlichen Methoden auch!
+            //////oder wenn schon vorhanden und wir müssen es andersum sortieren,dann :
+            ////IEnumerable<int> reversedInts = from number in someInts orderby number descending select number;
 
-            foreach (var num in reversedInts)
-            {
-                Console.WriteLine(num);
-            }
+            ////foreach (var num in reversedInts)
+            ////{
+            ////    Console.WriteLine(num);
+            ////}
+
+
+            /// Kollektionen aus anderen Kollektionen erzeugen:
+                /// Hier wollen wir Namen von Student und Uni Zusammenbringen, Kein IdNummern oder so. in der UniversitymanagerKlasse:
+                ///public void SudentAndUniversityNameCollection()
+                ///{
+                ///    var newCollection = from student in students
+                ///                        join university in universities on student.Id equals university.Id
+                ///                        orderby student.Name
+                ///                        select new { StudentName = student.Name, UniversityName = university.Name };
+                /// HIER WIRD WIEDER NEW VERWENDET!! ABER WIESO?? WIESO DIESE SYNTAX!!!???
+                /// der Ergebnis vom SELECT wird in ein neuen objekt erstellt mit 2 properties, die Namen von Student und Uni
+                /// wenn wir der Maus auf "var" oder "newCollection" lassen, es zeigt uns "Anonyme Typen", mit 2 Strings StudentName und UniversityName.
+            /// Die Methode ausführen zum anzeigenlassen
+            um.SudentAndUniversityNameCollection();
+
+
+            /// Kollektionen aus anderen Kollektionen erzeugen ENDE
 
 
             Console.ReadKey();
@@ -243,7 +261,7 @@ namespace LinqDemoUndArrays
         public void AllStudentsByUni(int uniId)
         {
             var allStudentsByUni = from student in students
-                                   join University in universities 
+                                   join University in universities
                                    on student.UniversityId equals University.Id     //equals heisst == ist hier besser sogar.
                                    where University.Id == uniId
                                    select student;
@@ -277,6 +295,33 @@ namespace LinqDemoUndArrays
             }
         }
 
+
+
+        /// Kollektionen aus anderen Kollektionen erzeugen:
+        /// ...
+        /// Hier wollen wir Namen von Student und Uni Zusammenbringen, Kein IdNummern oder so
+        public void SudentAndUniversityNameCollection()
+        {
+            var newCollection = from student in students
+                                join university in universities on student.Id equals university.Id
+                                orderby student.Name
+                                select new { StudentName = student.Name, UniversityName = university.Name };
+            /// HIER WIRD WIEDER NEW VERWENDET!! ABER WIESO?? WIESO DIESE SYNTAX!!!???
+            /// der Ergebnis vom SELECT wird in ein neuen objekt erstellt mit 2 properties, die Namen von Student und Uni
+            /// wenn wir der Maus auf "var" oder "newCollection" lassen, es zeigt uns "Anonyme Typen", mit 2 Strings StudentName und UniversityName.
+            /// 
+            /// HIER WIRD ABER NUR 4 Namen Paare GEZEIGT!!! wir haben 4 unis aber 9 Studenten,
+            /// 5 studenten werden gar nicht angezeigt!!! nicht saubere Code!!!!!!
+            /// TODO: selber versuchen mit Left oder left outer...
+
+            Console.WriteLine("Neue Sammlung");
+            foreach (var col in newCollection)
+            {
+                Console.WriteLine($"Student/in {col.StudentName} studiert in {col.UniversityName}.");
+            }
+        }
+
+        /// Kollektionen aus anderen Kollektionen erzeugen ENDE
     }
 }
 
