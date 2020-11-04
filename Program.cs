@@ -303,7 +303,7 @@ namespace LinqDemoUndArrays
         public void SudentAndUniversityNameCollection()
         {
             var newCollection = from student in students
-                                join university in universities on student.Id equals university.Id
+                                join university in universities on student.UniversityId equals university.Id
                                 orderby student.Name
                                 select new { StudentName = student.Name, UniversityName = university.Name };
             /// HIER WIRD WIEDER NEW VERWENDET!! ABER WIESO?? WIESO DIESE SYNTAX!!!???
@@ -313,6 +313,10 @@ namespace LinqDemoUndArrays
             /// HIER WIRD ABER NUR 4 Namen Paare GEZEIGT!!! wir haben 4 unis aber 9 Studenten,
             /// 5 studenten werden gar nicht angezeigt!!! nicht saubere Code!!!!!!
             /// TODO: selber versuchen mit Left oder left outer...
+            ///     join university in universities on student.UniversityId equals university.Id
+            ///     anstatt
+            ///     join university in universities on student.Id equals university.Id
+            ///     Hatte ich einfach falsch kopiert....BLÖD
 
             Console.WriteLine("Neue Sammlung");
             foreach (var col in newCollection)
@@ -321,9 +325,32 @@ namespace LinqDemoUndArrays
             }
         }
 
-        /// Kollektionen aus anderen Kollektionen erzeugen ENDE
+        ////// MEINE FALSCHE LÖSUNG
+        //////public void SudentAndUniversityNameCollection()
+        //////{
+        //////    var newCollection = from student in students
+        //////                        join university in universities
+        //////                        on student.UniversityId equals university.Id into universities
+        //////                        from uni in universities.DefaultIfEmpty()
+        //////                            //orderby student.Name
+        //////                        select new
+        //////                        {
+        //////                            StudentName = student.Name,
+        //////                            UniversityName = uni == null ? "No university" : uni.Name
+        //////                        };
+        //////    /// HIER WIRD WIEDER NEW VERWENDET!! ABER WIESO?? WIESO DIESE SYNTAX!!!???
+        //////    /// der Ergebnis vom SELECT wird in ein neuen objekt erstellt mit 2 properties, die Namen von Student und Uni
+        //////    /// wenn wir der Maus auf "var" oder "newCollection" lassen, es zeigt uns "Anonyme Typen", mit 2 Strings StudentName und UniversityName.
+        //////    /// 
+        //////    /// HIER WIRD ABER NUR 4 Namen Paare GEZEIGT!!! wir haben 4 unis aber 9 Studenten,
+        //////    /// 5 studenten werden gar nicht angezeigt!!! nicht saubere Code!!!!!!
+        //////    /// TODO: selber versuchen mit Left oder left outer...
+        //////    /// ES KLAPPT IRGENDWIE NICHT!!!?
+
+
+            /// Kollektionen aus anderen Kollektionen erzeugen ENDE
+        }
     }
-}
 
 
 public class University
